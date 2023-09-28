@@ -1,48 +1,37 @@
-package com.cbcoders.car_app_v1.Cars.model;
+package com.cbcoders.car_app_v1.Cars.model.DTO;
 
 import com.cbcoders.car_app_v1.Cars.model.Enums.SoldOrStock;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@SequenceGenerator(name = "car_seq", initialValue = 1, allocationSize = 1)
-public abstract class Car implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_seq")
+public class CarDTO { // User user
     private Long carId;
-    @Column(nullable = false)
     private String brand;
-    @Column(nullable = false)
     private String model;
-    @Column(nullable = false)
     private String color;
-    @Column(nullable = false, unique = true)
     private String chassisNumber;
-    @Column(nullable = false)
     private Integer keysNumber;
-    @Column(nullable = false)
     @JsonFormat(pattern = "dd-MM-yyyy", timezone = "Europe/London")
     @Temporal(TemporalType.DATE)
     private Date dateArrived;
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private SoldOrStock soldOrStock;
-    @Column(nullable = true)
     private String customerName;
+    private String regNumber;
+    private Integer mileage;
+    //private User user;
 
-    public Car() {
+    public CarDTO() {
     }
 
-    public Car(String brand, String model, String color, String chassisNumber, Integer keysNumber, Date dateArrived,
-               SoldOrStock soldOrStock, String customerName) {
+    public CarDTO(String brand, String model, String color, String chassisNumber, Integer keysNumber, Date dateArrived,
+                  SoldOrStock soldOrStock, String customerName, String regNumber, Integer mileage) {
         this.brand = brand;
         this.model = model;
         this.color = color;
@@ -51,6 +40,8 @@ public abstract class Car implements Serializable {
         this.dateArrived = dateArrived;
         this.soldOrStock = soldOrStock;
         this.customerName = customerName;
+        this.regNumber = regNumber;
+        this.mileage = mileage;
     }
 
     public Long getCarId() {
@@ -125,21 +116,33 @@ public abstract class Car implements Serializable {
         this.customerName = customerName;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Car car)) return false;
-        return Objects.equals(getCarId(), car.getCarId());
+    public String getRegNumber() {
+        return regNumber;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getCarId());
+    public void setRegNumber(String regNumber) {
+        this.regNumber = regNumber;
     }
+
+    public Integer getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(Integer mileage) {
+        this.mileage = mileage;
+    }
+
+   /* public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }*/
 
     @Override
     public String toString() {
-        return "Car{" +
+        return "CarDTO{" +
                 "carId=" + carId +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
@@ -149,6 +152,9 @@ public abstract class Car implements Serializable {
                 ", dateArrived=" + dateArrived +
                 ", soldOrStock=" + soldOrStock +
                 ", customerName='" + customerName + '\'' +
+                ", regNumber='" + regNumber + '\'' +
+                ", mileage=" + mileage +
+                //", user=" + user +
                 '}';
     }
 }
