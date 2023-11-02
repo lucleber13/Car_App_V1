@@ -51,7 +51,7 @@ public class User implements Serializable {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = firstName.toUpperCase();
 	}
 
 	public String getLastName() {
@@ -59,7 +59,7 @@ public class User implements Serializable {
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = lastName.toUpperCase();
 	}
 
 	public String getEmail() {
@@ -67,7 +67,7 @@ public class User implements Serializable {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email.toLowerCase();
 	}
 
 	public String getPassword() {
