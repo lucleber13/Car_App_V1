@@ -1,5 +1,6 @@
 package com.cbcoders.car_app_v1.Users.model;
 
+import com.cbcoders.car_app_v1.Cars.model.NewCar;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -26,6 +27,7 @@ public class User implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "role_id", referencedColumnName = "roleId")
 	private Role role;
+
 
 	public User() {
 		super();

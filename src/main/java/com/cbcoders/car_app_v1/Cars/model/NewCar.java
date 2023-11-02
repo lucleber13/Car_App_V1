@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "carId")
@@ -14,6 +15,7 @@ public class NewCar extends Car implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private User user;

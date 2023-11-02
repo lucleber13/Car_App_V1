@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface NewCarRepository extends JpaRepository<NewCar, Long> {
 
 	Optional<NewCar> findByChassisNumber(String chassisNumber);
-
 	List<NewCar> findByModelContainsIgnoreCase(String model);
+
 }
