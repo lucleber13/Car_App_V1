@@ -8,7 +8,7 @@ import java.util.List;
 public interface NewCarService {
     NewCarDTO createNewCar(NewCarDTO newCarDTO);
     NewCarDTO updateNewCar(Long carId, NewCarDTO newCarDTO);
-    List<NewCarDTO> getNewCarsByModel(String model);
+    List<NewCarDTO> getNewCarByModel(String model);
 }
 
 

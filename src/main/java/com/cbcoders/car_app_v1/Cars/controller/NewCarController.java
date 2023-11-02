@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/newcar")
@@ -31,5 +32,10 @@ public class NewCarController {
 	@PutMapping("/update/{carId}")
 	public ResponseEntity<NewCarDTO> updateNewCar(@PathVariable Long carId, @RequestBody NewCarDTO newCarDTO) {
 		return ResponseEntity.ok(newCarService.updateNewCar(carId, newCarDTO));
+	}
+
+	@GetMapping("/model/{model}")
+	public ResponseEntity<List<NewCarDTO>> getNewCarByModel(@PathVariable String model) {
+		return ResponseEntity.ok(newCarService.getNewCarByModel(model));
 	}
 }

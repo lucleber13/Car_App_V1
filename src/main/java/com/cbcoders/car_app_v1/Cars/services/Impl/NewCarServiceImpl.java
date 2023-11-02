@@ -43,7 +43,7 @@ public class NewCarServiceImpl implements NewCarService {
         newCar = newCarRepository.save(newCar);
         return modelMapper.map(newCar, NewCarDTO.class);
         } catch (Exception e) {
-            throw new CarAlreadyExistsException(e.getMessage());
+            throw new CarNotFoundException("The " + e.getMessage());
         }
     }
 
@@ -72,7 +72,14 @@ public class NewCarServiceImpl implements NewCarService {
     }
 
     @Override
-    public List<NewCarDTO> getNewCarsByModel(String model) {
-        return null;
+    public List<NewCarDTO> getNewCarByModel(String model) {
+        List<NewCar> newCarList = newCarRepository.findByModelContainsIgnoreCase(model);
+        if (newCarList.isEmpty()) {
+            throw new CarNotFoundException("No cars found with model " + model);
+        }
+        return newCarList.stream()
+                .map(newCar -> modelMapper.map(newCar, NewCarDTO.class))
+                .toList();
     }
+
 }
