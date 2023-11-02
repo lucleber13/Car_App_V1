@@ -1,49 +1,43 @@
 package com.cbcoders.car_app_v1.Cars.model;
 
-import com.cbcoders.car_app_v1.Cars.model.Enums.SoldOrStock;
+import com.cbcoders.car_app_v1.Cars.model.Enums.CarNewOrUsed;
+import com.cbcoders.car_app_v1.Users.model.User;
 import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "carId")
-@Table(name = "newCar")
 public class NewCar extends Car implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
-
-    /*@ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
-    private User user;*/
+    private User user;
 
     public NewCar() {
     }
 
     public NewCar(String brand, String model, String color, String chassisNumber, Integer keysNumber, Date dateArrived,
-                  SoldOrStock soldOrStock, String customerName) {
-        super(brand, model, color, chassisNumber, keysNumber, dateArrived, soldOrStock, customerName);
-
+                  CarNewOrUsed carNewOrUsed, Boolean isSold) {
+        super(brand, model, color, chassisNumber, keysNumber, dateArrived, carNewOrUsed, isSold);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof NewCar newCar)) return false;
-        if (!super.equals(o)) return false;
-        return Objects.equals(getCustomerName(), newCar.getCustomerName());
+    public User getUser() {
+        return user;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getCustomerName());
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
         return "NewCar{" +
-                '}' + super.toString();
+                "user=" + user +
+                "} " + super.toString();
     }
 }

@@ -1,6 +1,7 @@
 package com.cbcoders.car_app_v1.Cars.model;
 
-import com.cbcoders.car_app_v1.Cars.model.Enums.SoldOrStock;
+import com.cbcoders.car_app_v1.Cars.model.Enums.CarNewOrUsed;
+import com.cbcoders.car_app_v1.Users.model.User;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -10,25 +11,23 @@ import java.util.Objects;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "carId")
-@Table(name = "usedCar")
 public class UsedCar extends Car implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    @Column(nullable = false)
     private Integer mileage;
-    @Column(nullable = false)
+    @Column(nullable = true, unique = true)
     private String regNumber;
 
-    /*@ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
-    private User user;*/
+    private User user;
 
     public UsedCar() {
     }
 
     public UsedCar(String brand, String model, String color, String chassisNumber, Integer keysNumber, Date dateArrived,
-                   SoldOrStock soldOrStock, String customerName, Integer mileage, String regNumber) {
-        super(brand, model, color, chassisNumber, keysNumber, dateArrived, soldOrStock, customerName);
+                   CarNewOrUsed carNewOrUsed, Integer mileage, String regNumber, Boolean isSold) {
+        super(brand, model, color, chassisNumber, keysNumber, dateArrived, carNewOrUsed, isSold);
         this.mileage = mileage;
         this.regNumber = regNumber;
     }
@@ -46,7 +45,15 @@ public class UsedCar extends Car implements Serializable {
     }
 
     public void setRegNumber(String regNumber) {
-        this.regNumber = regNumber;
+        this.regNumber = regNumber.toUpperCase();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -68,6 +75,7 @@ public class UsedCar extends Car implements Serializable {
         return "UsedCar{" +
                 "mileage=" + mileage +
                 ", regNumber='" + regNumber + '\'' +
+                ", user=" + user +
                 '}' + super.toString();
     }
 }

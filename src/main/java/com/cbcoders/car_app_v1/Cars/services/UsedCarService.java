@@ -1,19 +1,13 @@
 package com.cbcoders.car_app_v1.Cars.services;
 
-import com.cbcoders.car_app_v1.Cars.model.UsedCar;
+import com.cbcoders.car_app_v1.Cars.model.DTO.UsedCarDTO;
 
 public interface UsedCarService {
-    UsedCar createUsedCar(UsedCar usedCar);
+    UsedCarDTO createUsedCar(UsedCarDTO usedCarDTO);
 
-    UsedCar updateUsedCar(Long carId, UsedCar usedCar);
+    UsedCarDTO updateUsedCar(Long carId, UsedCarDTO usedCarDTO);
 
-    void deleteUsedCar(Long carId);
-
-    UsedCar getUsedCarByChassisNumber(String chassisNumber);
-
-    UsedCar getUsedCarById(Long carId);
-
-    UsedCar getUsedCarByRegNumber(String regNumber);
+    UsedCarDTO getUsedCarByRegNumber(String regNumber);
 
 
 }

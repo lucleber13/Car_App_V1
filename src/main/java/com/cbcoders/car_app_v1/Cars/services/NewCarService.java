@@ -1,11 +1,16 @@
 package com.cbcoders.car_app_v1.Cars.services;
 
+import com.cbcoders.car_app_v1.Cars.model.DTO.NewCarDTO;
 import com.cbcoders.car_app_v1.Cars.model.NewCar;
 
+import java.util.List;
+
 public interface NewCarService {
-    NewCar createNewCar(NewCar newCar);
-    NewCar updateNewCar(Long carId, NewCar newCar);
-    void deleteNewCar(Long carId);
-    NewCar getNewCarById(Long carId);
-    NewCar getNewCarByChassisNumber(String chassisNumber);
+    NewCarDTO createNewCar(NewCarDTO newCarDTO);
+    NewCarDTO updateNewCar(Long carId, NewCarDTO newCarDTO);
+    List<NewCarDTO> getNewCarsByModel(String model);
 }
+
+
+
+

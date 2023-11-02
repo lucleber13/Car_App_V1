@@ -12,9 +12,9 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * DTO for {@link com.cbcoders.car_app_v1.Cars.model.Car}
+ * DTO for {@link com.cbcoders.car_app_v1.Cars.model.UsedCar}
  */
-public class CarDTO {
+public class UsedCarDTO {
 	private Long carId;
 	private String brand;
 	private String model;
@@ -31,11 +31,11 @@ public class CarDTO {
 	private String regNumber;
 	private User user;
 
-	public CarDTO() {
+	public UsedCarDTO() {
 	}
 
-	public CarDTO(Long carId, String brand, String model, String color, String chassisNumber, Integer keysNumber,
-	              Date dateArrived, CarNewOrUsed carNewOrUsed, Boolean isSold, Integer mileage, String regNumber) {
+	public UsedCarDTO(Long carId, String brand, String model, String color, String chassisNumber, Integer keysNumber,
+	                  Date dateArrived, CarNewOrUsed carNewOrUsed, Boolean isSold, Integer mileage, String regNumber) {
 		this.carId = carId;
 		this.brand = brand;
 		this.model = model;
@@ -148,8 +148,8 @@ public class CarDTO {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof CarDTO carDTO)) return false;
-		return Objects.equals(getCarId(), carDTO.getCarId());
+		if (!(o instanceof UsedCarDTO that)) return false;
+		return Objects.equals(getCarId(), that.getCarId());
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class CarDTO {
 
 	@Override
 	public String toString() {
-		return "CarDTO{" +
+		return "UsedCarDTO{" +
 				"carId=" + carId +
 				", brand='" + brand + '\'' +
 				", model='" + model + '\'' +

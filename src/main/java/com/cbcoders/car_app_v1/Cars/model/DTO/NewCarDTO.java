@@ -12,9 +12,9 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * DTO for {@link com.cbcoders.car_app_v1.Cars.model.Car}
+ * DTO for {@link com.cbcoders.car_app_v1.Cars.model.NewCar}
  */
-public class CarDTO {
+public class NewCarDTO {
 	private Long carId;
 	private String brand;
 	private String model;
@@ -27,15 +27,13 @@ public class CarDTO {
 	@Enumerated(EnumType.STRING)
 	private CarNewOrUsed carNewOrUsed;
 	private Boolean isSold;
-	private Integer mileage;
-	private String regNumber;
 	private User user;
 
-	public CarDTO() {
+	public NewCarDTO() {
 	}
 
-	public CarDTO(Long carId, String brand, String model, String color, String chassisNumber, Integer keysNumber,
-	              Date dateArrived, CarNewOrUsed carNewOrUsed, Boolean isSold, Integer mileage, String regNumber) {
+	public NewCarDTO(Long carId, String brand, String model, String color, String chassisNumber, Integer keysNumber,
+	                 Date dateArrived, CarNewOrUsed carNewOrUsed, Boolean isSold) {
 		this.carId = carId;
 		this.brand = brand;
 		this.model = model;
@@ -45,8 +43,6 @@ public class CarDTO {
 		this.dateArrived = dateArrived;
 		this.carNewOrUsed = carNewOrUsed;
 		this.isSold = isSold;
-		this.mileage = mileage;
-		this.regNumber = regNumber;
 	}
 
 	public Long getCarId() {
@@ -121,22 +117,6 @@ public class CarDTO {
 		isSold = sold;
 	}
 
-	public Integer getMileage() {
-		return mileage;
-	}
-
-	public void setMileage(Integer mileage) {
-		this.mileage = mileage;
-	}
-
-	public String getRegNumber() {
-		return regNumber;
-	}
-
-	public void setRegNumber(String regNumber) {
-		this.regNumber = regNumber;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -148,8 +128,8 @@ public class CarDTO {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof CarDTO carDTO)) return false;
-		return Objects.equals(getCarId(), carDTO.getCarId());
+		if (!(o instanceof NewCarDTO newCarDTO)) return false;
+		return Objects.equals(getCarId(), newCarDTO.getCarId());
 	}
 
 	@Override
@@ -159,7 +139,7 @@ public class CarDTO {
 
 	@Override
 	public String toString() {
-		return "CarDTO{" +
+		return "NewCarDTO{" +
 				"carId=" + carId +
 				", brand='" + brand + '\'' +
 				", model='" + model + '\'' +
@@ -169,8 +149,6 @@ public class CarDTO {
 				", dateArrived=" + dateArrived +
 				", carNewOrUsed=" + carNewOrUsed +
 				", isSold=" + isSold +
-				", mileage=" + mileage +
-				", regNumber='" + regNumber + '\'' +
 				", user=" + user +
 				'}';
 	}

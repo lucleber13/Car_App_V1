@@ -1,6 +1,6 @@
 package com.cbcoders.car_app_v1.Cars.model;
 
-import com.cbcoders.car_app_v1.Cars.model.Enums.SoldOrStock;
+import com.cbcoders.car_app_v1.Cars.model.Enums.CarNewOrUsed;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @SequenceGenerator(name = "car_seq", initialValue = 1, allocationSize = 1)
 public abstract class Car implements Serializable {
     @Serial
@@ -34,23 +34,22 @@ public abstract class Car implements Serializable {
     private Date dateArrived;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private SoldOrStock soldOrStock;
-    @Column(nullable = true)
-    private String customerName;
+    private CarNewOrUsed carNewOrUsed;
+    private Boolean isSold = false;
 
     public Car() {
     }
 
     public Car(String brand, String model, String color, String chassisNumber, Integer keysNumber, Date dateArrived,
-               SoldOrStock soldOrStock, String customerName) {
+               CarNewOrUsed carNewOrUsed, Boolean isSold) {
         this.brand = brand;
         this.model = model;
         this.color = color;
         this.chassisNumber = chassisNumber;
         this.keysNumber = keysNumber;
         this.dateArrived = dateArrived;
-        this.soldOrStock = soldOrStock;
-        this.customerName = customerName;
+        this.carNewOrUsed = carNewOrUsed;
+        this.isSold = isSold;
     }
 
     public Long getCarId() {
@@ -66,7 +65,7 @@ public abstract class Car implements Serializable {
     }
 
     public void setBrand(String brand) {
-        this.brand = brand;
+        this.brand = brand.toUpperCase();
     }
 
     public String getModel() {
@@ -74,7 +73,7 @@ public abstract class Car implements Serializable {
     }
 
     public void setModel(String model) {
-        this.model = model;
+        this.model = model.toUpperCase();
     }
 
     public String getColor() {
@@ -82,7 +81,7 @@ public abstract class Car implements Serializable {
     }
 
     public void setColor(String color) {
-        this.color = color;
+        this.color = color.toUpperCase();
     }
 
     public String getChassisNumber() {
@@ -90,7 +89,7 @@ public abstract class Car implements Serializable {
     }
 
     public void setChassisNumber(String chassisNumber) {
-        this.chassisNumber = chassisNumber;
+        this.chassisNumber = chassisNumber.toUpperCase();
     }
 
     public Integer getKeysNumber() {
@@ -109,20 +108,19 @@ public abstract class Car implements Serializable {
         this.dateArrived = dateArrived;
     }
 
-    public SoldOrStock getSoldOrStock() {
-        return soldOrStock;
+    public CarNewOrUsed getCarNewOrUsed() {
+        return carNewOrUsed;
     }
 
-    public void setSoldOrStock(SoldOrStock soldOrStock) {
-        this.soldOrStock = soldOrStock;
+    public void setCarNewOrUsed(CarNewOrUsed carNewOrUsed) {
+        this.carNewOrUsed = carNewOrUsed;
+    }
+    public Boolean getSold() {
+        return isSold;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setSold(Boolean sold) {
+        isSold = sold;
     }
 
     @Override
@@ -147,8 +145,8 @@ public abstract class Car implements Serializable {
                 ", chassisNumber='" + chassisNumber + '\'' +
                 ", keysNumber=" + keysNumber +
                 ", dateArrived=" + dateArrived +
-                ", soldOrStock=" + soldOrStock +
-                ", customerName='" + customerName + '\'' +
+                ", carNewOrUsed=" + carNewOrUsed +
+                ", isSold=" + isSold +
                 '}';
     }
 }
